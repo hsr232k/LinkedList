@@ -1,0 +1,73 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node
+{
+    int data;
+    struct node *next;
+}*head=NULL,*end=NULL,*temp,*p;
+
+void insert()
+{
+    int x;
+    scanf("%d",&x);
+    temp=(struct node*)malloc(sizeof(struct node));
+
+    temp->data=x;
+    temp->next=NULL;
+
+    if(head==NULL)
+    {
+     head=end=temp;
+    }
+    else
+    {
+    end->next=temp;
+    end=temp;
+    }
+}
+
+void display()
+{
+    p=(struct node*)malloc(sizeof(struct node));
+    p=head;
+    printf("THE ELEMENTS ARE :-\n");
+    while(p!=NULL)
+    {
+      printf("\n%d",p->data);
+      p=p->next;
+    }
+}
+
+void del()
+{
+  int m;
+  printf("\nENTER THE ELEMENTS TO BE DELETED: ");
+  scanf("%d",&m);
+  p=(struct node*)malloc(sizeof(struct node));
+  p=head;
+  while(p->next->data!=m)
+  {
+      p=p->next;
+  }
+  temp=p->next;
+  p->next=temp->next;
+  free(temp);
+}
+
+int main()
+{
+    int n,i;
+    printf("\nENTER THE NUMBER OF NODES TO BE INSERTED:");
+    scanf("%d",&n);
+    printf("\nENTER THE DATA:");
+    for(i=0;i<n;i++)
+    {
+        insert();
+    }
+    display();
+    del();
+    printf("\nAFTER DELETING ");
+    display();
+    return 0;
+}
